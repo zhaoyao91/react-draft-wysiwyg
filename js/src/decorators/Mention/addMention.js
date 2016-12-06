@@ -1,6 +1,5 @@
 import {
   EditorState,
-  Entity,
   Modifier,
 } from 'draft-js';
 import { getSelectedBlock } from 'draftjs-utils';
@@ -12,12 +11,7 @@ export default function addMention(
   trigger: string,
   suggestion: Object,
 ): void {
-  const { text, value, url } = suggestion;
-  const entityKey = Entity.create('MENTION', 'MUTABLE', {
-    text: `${trigger}${text}`,
-    value,
-    url,
-  });
+  const { text } = suggestion;
   const selectedBlock = getSelectedBlock(editorState);
   const selectedBlockText = selectedBlock.getText();
   const mentionIndex = (selectedBlockText.lastIndexOf(separator + trigger) || 0) + 1;
@@ -33,7 +27,6 @@ export default function addMention(
     updatedSelection,
     `${trigger}${text}`,
     newEditorState.getCurrentInlineStyle(),
-    entityKey,
   );
   newEditorState = EditorState.push(newEditorState, contentState, 'insert-characters');
 

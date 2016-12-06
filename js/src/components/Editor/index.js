@@ -207,9 +207,6 @@ export default class WysiwygEditor extends Component {
 
   handleReturn: Function = (event: Object): boolean => {
     let returnValue = false;
-    if (this.props.mention) {
-      returnValue = MentionDecorator.handleReturn();
-    }
     const editorState = handleNewLine(this.state.editorState, event);
     if (editorState) {
       this.onChange(editorState);

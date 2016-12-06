@@ -1,6 +1,5 @@
 import { mentionDecorator, setMentionConfig } from './Mention';
 import { suggestionDecorator, setSuggestionConfig } from './Suggestion';
-import { handleReturn, setHandleReturnConfig } from './handleReturn';
 
 let config = {
   separator: ' ',
@@ -16,7 +15,12 @@ let config = {
 
 function setConfig(conf) {
   config = { ...config, ...conf };
-  setMentionConfig({ mentionClassName: config.mentionClassName });
+  setMentionConfig({
+    separator: config.separator,
+    trigger: config.trigger,
+    suggestions: config.suggestions,
+    mentionClassName: config.mentionClassName,
+  });
   setSuggestionConfig({
     separator: config.separator,
     trigger: config.trigger,
@@ -27,17 +31,9 @@ function setConfig(conf) {
     dropdownClassName: config.dropdownClassName,
     optionClassName: config.optionClassName,
   });
-  setHandleReturnConfig({
-    separator: config.separator,
-    trigger: config.trigger,
-    suggestions: config.suggestions,
-    onChange: config.onChange,
-    getEditorState: config.getEditorState,
-  });
 }
 
 export default {
   decorators: [mentionDecorator, suggestionDecorator],
   setConfig,
-  handleReturn,
 };
