@@ -11,7 +11,7 @@ export default function addMention(
   trigger: string,
   suggestion: Object,
 ): void {
-  const { text } = suggestion;
+  const { value } = suggestion;
   const selectedBlock = getSelectedBlock(editorState);
   const selectedBlockText = selectedBlock.getText();
   const mentionIndex = (selectedBlockText.lastIndexOf(separator + trigger) || 0) + 1;
@@ -25,15 +25,15 @@ export default function addMention(
   let contentState = Modifier.replaceText(
     newEditorState.getCurrentContent(),
     updatedSelection,
-    `${trigger}${text}`,
+    `${trigger}${value}`,
     newEditorState.getCurrentInlineStyle(),
   );
   newEditorState = EditorState.push(newEditorState, contentState, 'insert-characters');
 
   // insert a blank space after mention
   updatedSelection = newEditorState.getSelection().merge({
-    anchorOffset: mentionIndex + text.length + trigger.length,
-    focusOffset: mentionIndex + text.length + trigger.length,
+    anchorOffset: mentionIndex + value.length + trigger.length,
+    focusOffset: mentionIndex + value.length + trigger.length,
   });
   newEditorState = EditorState.acceptSelection(newEditorState, updatedSelection);
   contentState = Modifier.insertText(

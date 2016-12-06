@@ -102,7 +102,7 @@ class Suggestion extends Component {
               onClick={this.addMention.bind(undefined, suggestion)}
               className={classNames('rdw-suggestion-option', optionClassName)}
             >
-              {suggestion.text}
+              {suggestion.display}
             </span>)}
         </span>
       </span>

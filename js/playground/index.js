@@ -27,6 +27,26 @@ const contentState = ContentState.createFromBlockArray(contentBlocks);
 
 const rawContentState = convertToRaw(contentState);
 
+const mentionConfig = {
+  separator: ' ',
+  trigger: '@',
+  suggestions: [
+    { value: 'abc', display: 'A B C', url: 'abc' },
+    { value: 'abcd', display: 'A B C', url: 'abcd' },
+    { value: 'abcde', display: 'A B C D', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D E', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D E', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D E', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D E', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D E', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D E', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D E', url: 'abcde' },
+    { value: 'abcde', display: 'A B C D E', url: 'abcde' },
+  ],
+};
+
 class Playground extends Component {
 
   state: any = {
@@ -83,30 +103,12 @@ class Playground extends Component {
               onChange={this.onEditorChange}
               uploadCallback={this.imageUploadCallBack}
               spellCheck
-              mention={{
-                separator: ' ',
-                trigger: '@',
-                suggestions: [
-                  { text: 'abc', value: 'abc', url: 'abc' },
-                  { text: 'abcd', value: 'abcd', url: 'abcd' },
-                  { text: 'abcde', value: 'abcde', url: 'abcde' },
-                  { text: 'abcde', value: 'abcdef', url: 'abcde' },
-                  { text: 'abcde', value: 'abcdefg', url: 'abcde' },
-                  { text: 'abcde', value: 'abcdefgh', url: 'abcde' },
-                  { text: 'abcde', value: 'abcdefghi', url: 'abcde' },
-                  { text: 'abcde', value: 'abcde', url: 'abcde' },
-                  { text: 'abcde', value: 'abcde', url: 'abcde' },
-                  { text: 'abcde', value: 'abcde', url: 'abcde' },
-                  { text: 'abcde', value: 'abcde', url: 'abcde' },
-                  { text: 'abcde', value: 'abcde', url: 'abcde' },
-                  { text: 'abcde', value: 'abcde', url: 'abcde' },
-                ],
-              }}
+              mention={mentionConfig}
             />
           </div>
           <textarea
             className="playground-content no-focus"
-            value={draftToHtml(editorContent)}
+            value={draftToHtml(editorContent, mentionConfig)}
           />
           <textarea
             className="playground-content no-focus"
